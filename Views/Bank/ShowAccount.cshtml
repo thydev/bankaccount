@@ -1,0 +1,29 @@
+@using System.Linq;
+@{
+    ViewData["Title"] = ViewBag.User.FirstName;
+}
+
+<hr />
+<h3>Welcome @ViewBag.User.FirstName</h3>
+<h4>Your current balance: $ @ViewBag.User.CurrentBalance</h4>
+<p class="text text-danger">@ViewBag.ErrorMessage</p>
+<form action="/Account/@ViewBag.User.UserId/AddTransaction" method="post">
+    @Html.AntiForgeryToken()
+    <p>Deposit / Withdraw : <input type="number" name="Amount">
+        <button type="submit">Submit</button>
+    </p>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+
+@foreach(var r in @ViewBag.User.AccountTransactions) {
+    <tr>
+        <td>@r.Amount</td>
+        <td>@r.TransactionDate</td>
+    </tr>
+}
+</table>
