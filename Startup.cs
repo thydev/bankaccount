@@ -41,6 +41,7 @@ namespace bankaccount
             }
 
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc();
 
             // app.UseMvc(routes =>
